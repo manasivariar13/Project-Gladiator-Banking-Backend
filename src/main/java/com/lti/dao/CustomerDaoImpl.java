@@ -1,14 +1,17 @@
 package com.lti.dao;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Component;
 
 import com.lti.entity.Account;
+import com.lti.entity.Customer;
 import com.lti.entity.Transaction;
 import com.lti.entity.TransactionType;
 
@@ -54,4 +57,36 @@ public class CustomerDaoImpl implements CustomerDao {
 		return transaction;
 	}
 
+	@Transactional
+	public Transaction addOrUpdateTransaction(Transaction transaction) {
+		// TODO Auto-generated method stub
+		Transaction tr = em.merge(transaction);
+		return tr;
+
+	}
+
+	@Transactional
+	public List<Transaction> findtoprec() {
+		// TODO Auto-generated method stub
+		String jpql = "select tx from Transaction tx WHERE rownum<=5 ORDER BY transactionId DESC";
+		TypedQuery<Transaction> query = em.createQuery(jpql, Transaction.class);
+		return query.getResultList();
+	}
+	
+	@Transactional
+	public boolean isUserExists(int custId) {
+//		String jpql="select count(c.custId)>0 from Customer c where c.custId=:custId";
+//		TypedQuery<Customer> query=em.createNamedQuery(jpql, Customer.class);
+//		query.setParameter("custId",custId);
+//		Customer cust=query.getSingleResult();
+//		return cust!=null?true:false;
+		return em.find(Customer.class, custId) != null;
+	}
+	
+	@Transactional
+	public Customer addOrUpdateCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+		Customer c = em.merge(customer);
+		return c;
+	}
 }
