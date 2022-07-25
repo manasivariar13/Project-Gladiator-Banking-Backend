@@ -1,9 +1,11 @@
 package com.lti.dao;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Component;
@@ -27,6 +29,13 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Transactional
 	public Account accountSummary(int accountNumber) {
 		return em.find(Account.class, accountNumber);
+	}
+
+	@Transactional
+	public List<Transaction> accountStatement() {
+		String jpql = "select t from Transaction t";
+		TypedQuery<Transaction> query = em.createQuery(jpql, Transaction.class);
+		return query.getResultList();
 	}
 
 	@Transactional

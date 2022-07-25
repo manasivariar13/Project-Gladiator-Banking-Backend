@@ -3,6 +3,7 @@ package banking;
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -48,12 +49,22 @@ public class CustomerTest {
 		assertNotNull(a);
 		System.out.println(a.getAccountNumber() + " " + a.getBalance());
 	}
-	
+
+	@Test
+	public void accountStatementTest() {
+		List<Transaction> transactions = dao.accountStatement();
+		assertFalse(transactions.isEmpty());
+		for (Transaction t : transactions) {
+			System.out.println(t.getTransactionId() + " " + t.getAmount() + " " + t.getTransactionDate() + " "
+					+ t.getTransactionType() + " " + t.getAccount().getAccountNumber() + " " + t.getMode());
+		}
+	}
+
 	@Test
 	public void fundTransferTest() {
-		Account a1 = dao.accountSummary(1000005);
-		Account a2 = dao.accountSummary(1000006);
-		assertNotNull(dao.fundTransfer(a1, a2, 500));
+		Account a1 = dao.accountSummary(1000006);
+		Account a2 = dao.accountSummary(1000007);
+		assertNotNull(dao.fundTransfer(a1, a2, 700));
 	}
 
 }

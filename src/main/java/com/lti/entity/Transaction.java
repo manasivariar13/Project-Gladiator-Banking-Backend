@@ -28,8 +28,8 @@ public class Transaction {
 
 	@Column(name = "tx_amount")
 	private double amount;
-	
-	@Column(name="transaction_mode")
+
+	@Column(name = "transaction_mode")
 	private String mode;
 
 	@Column(name = "tx_type")
