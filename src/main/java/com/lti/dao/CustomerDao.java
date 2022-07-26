@@ -24,4 +24,7 @@ public interface CustomerDao {
 	
 	Customer addOrUpdateCustomer(Customer customer);
 
+	boolean login(int userId,String password);
+
+
 }
