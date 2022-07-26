@@ -1,6 +1,10 @@
 package com.lti.entity;
 
 import java.time.LocalDate;
+<<<<<<< HEAD
+=======
+import java.util.List;
+>>>>>>> e6fd0925a29f411700679ef6f174ada672a53560
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +13,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+<<<<<<< HEAD
+=======
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+>>>>>>> e6fd0925a29f411700679ef6f174ada672a53560
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -18,6 +27,7 @@ import javax.persistence.Table;
 
 public class Customer {
 	@Id
+<<<<<<< HEAD
 	@SequenceGenerator(name = "cust_seq", sequenceName = "CUSTOMER_SERVICE_REF_NO_SEQ",  allocationSize = 11)
 	@GeneratedValue(generator = "cust_seq", strategy = GenerationType.SEQUENCE)
 	@Column(name="service_ref_no")
@@ -137,6 +147,102 @@ public class Customer {
 	}
 
 
+=======
+	@SequenceGenerator(name = "cust_seq", sequenceName = "CUSTOMER_SERVICE_REF_NO_SEQ", allocationSize = 11)
+	@GeneratedValue(generator = "cust_seq", strategy = GenerationType.SEQUENCE)
+	@Column(name = "customer_id")
+	private int custId;
+
+	private String customerPassword;
+
+	Gender gender;
+
+	@Column(name = "name")
+	private String Name;
+
+	@Column(name = "mobile_no")
+	private String mobileNo;
+
+	@Column(name = "email_id")
+	private String emailId;
+
+	@Column(name = "aadhaar_card_no")
+	private String aadhaarNo;
+
+	@Column(name = "date_of_birth")
+	private LocalDate dateOfBirth;
+
+	@Column(name = "pan_card_no")
+	private String panCardNo;
+
+	AccountStatus accountStatus;
+
+	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+	private Address Address;
+
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	private List<Account> account;
+
+	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+	private Income income;
+
+	public List<Account> getAccount() {
+		return account;
+	}
+
+	public void setAccount(List<Account> account) {
+		this.account = account;
+	}
+
+	public Income getIncome() {
+		return income;
+	}
+
+	public void setIncome(Income income) {
+		this.income = income;
+	}
+
+	public String getCustomerPassword() {
+		return customerPassword;
+	}
+
+	public void setCustomerPassword(String customerPassword) {
+		this.customerPassword = customerPassword;
+	}
+
+	public AccountStatus getAccountStatus() {
+		return accountStatus;
+	}
+
+	public void setAccountStatus(AccountStatus accountStatus) {
+		this.accountStatus = accountStatus;
+	}
+
+	public int getCustId() {
+		return custId;
+	}
+
+	public void setCustId(int custId) {
+		this.custId = custId;
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
+	public String getName() {
+		return Name;
+	}
+
+	public void setName(String name) {
+		Name = name;
+	}
+
+>>>>>>> e6fd0925a29f411700679ef6f174ada672a53560
 	public String getMobileNo() {
 		return mobileNo;
 	}
@@ -145,6 +251,17 @@ public class Customer {
 		this.mobileNo = mobileNo;
 	}
 
+<<<<<<< HEAD
+=======
+	public String getEmailId() {
+		return emailId;
+	}
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+
+>>>>>>> e6fd0925a29f411700679ef6f174ada672a53560
 	public String getAadhaarNo() {
 		return aadhaarNo;
 	}
@@ -161,6 +278,7 @@ public class Customer {
 		this.dateOfBirth = dateOfBirth;
 	}
 
+<<<<<<< HEAD
 	public String getOccupationType() {
 		return occupationType;
 	}
@@ -225,4 +343,22 @@ public class Customer {
 //		this.perAddress = perAddress;
 //	}
 
+=======
+	public String getPanCardNo() {
+		return panCardNo;
+	}
+
+	public void setPanCardNo(String panCardNo) {
+		this.panCardNo = panCardNo;
+	}
+
+	public Address getAddress() {
+		return Address;
+	}
+
+	public void setAddress(Address address) {
+		Address = address;
+	}
+
+>>>>>>> e6fd0925a29f411700679ef6f174ada672a53560
 }

@@ -5,6 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+<<<<<<< HEAD
+=======
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+>>>>>>> e6fd0925a29f411700679ef6f174ada672a53560
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -31,6 +36,13 @@ public class Address {
 
 	private String city;
 
+<<<<<<< HEAD
+=======
+	@OneToOne
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
+
+>>>>>>> e6fd0925a29f411700679ef6f174ada672a53560
 	@Column(name = "pincode")
 	private int pincode;
 

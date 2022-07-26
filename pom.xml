@@ -9,7 +9,11 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
+<<<<<<< HEAD
 			<version>5.3.7.Final</version>
+=======
+			<version>5.4.21.Final</version>
+>>>>>>> e6fd0925a29f411700679ef6f174ada672a53560
 		</dependency>
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
@@ -22,5 +26,28 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
+<<<<<<< HEAD
+=======
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>5.2.12.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>5.2.5.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>5.2.12.RELEASE</version>
+		</dependency>
+>>>>>>> e6fd0925a29f411700679ef6f174ada672a53560
 	</dependencies>
 </project>
