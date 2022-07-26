@@ -96,4 +96,20 @@ public class CustomerDaoImpl implements CustomerDao {
 		Customer c = em.merge(customer);
 		return c;
 	}
+
+	public boolean login(int custId, String password) {
+		String jpql = "select u from Customer c where c.userId=:cid and c.password=:pwd";
+
+		TypedQuery<User> query = em.createQuery(jpql, Customer.class);
+		query.setParameter("cid", custId);
+		query.setParameter("pwd", password);
+
+		Customer customer=null;
+		try {
+			customer = query.getSingleResult(); 
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
 }
