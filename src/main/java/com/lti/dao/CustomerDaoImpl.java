@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
 import com.lti.entity.Account;
+import com.lti.entity.Beneficiary;
 import com.lti.entity.Transaction;
 import com.lti.entity.TransactionType;
 
@@ -41,7 +42,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	@Transactional
 	public Transaction fundTransfer(Account fromAccount, Account toAccount, double amount) {
 		Transaction transaction = new Transaction();
-		transaction.setAccount(toAccount);
+		transaction.setToAccount(toAccount);
 		transaction.setAmount(amount);
 		transaction.setTransactionDate(LocalDate.now());
 		transaction.setTransactionType(TransactionType.NEFT);
@@ -49,7 +50,7 @@ public class CustomerDaoImpl implements CustomerDao {
 		em.persist(transaction);
 
 		Transaction transaction1 = new Transaction();
-		transaction1.setAccount(fromAccount);
+		transaction1.setToAccount(fromAccount);
 		transaction1.setAmount(amount);
 		transaction1.setTransactionDate(LocalDate.now());
 		transaction1.setTransactionType(TransactionType.NEFT);

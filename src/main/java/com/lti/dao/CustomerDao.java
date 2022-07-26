@@ -3,6 +3,7 @@ package com.lti.dao;
 import java.util.List;
 
 import com.lti.entity.Account;
+import com.lti.entity.Beneficiary;
 import com.lti.entity.Transaction;
 
 public interface CustomerDao {
