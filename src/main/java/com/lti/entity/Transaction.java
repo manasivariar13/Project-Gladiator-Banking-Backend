@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = "table_transaction")
 public class Transaction {
 	@Id
-	@SequenceGenerator(name = "trans_seq", sequenceName = "TRANSACTION_ID_SEQ", allocationSize = 1)
+	@SequenceGenerator(name = "trans_seq", initialValue = 201, allocationSize = 1)
 	@GeneratedValue(generator = "trans_seq", strategy = GenerationType.SEQUENCE)
 	@Column(name = "transaction_Id")
 	private int transactionId;

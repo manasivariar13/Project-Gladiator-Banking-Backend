@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
 import com.lti.entity.Account;
+import com.lti.entity.Beneficiary;
 import com.lti.entity.Customer;
 import com.lti.entity.Transaction;
 import com.lti.entity.TransactionType;
@@ -33,9 +34,10 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Transactional
-	public List<Transaction> accountStatement() {
-		String jpql = "select t from Transaction t";
+	public List<Transaction> accountStatement(int accountNumber) {
+		String jpql = "select t from Transaction t where t.account.accountNumber=:accno";
 		TypedQuery<Transaction> query = em.createQuery(jpql, Transaction.class);
+		query.setParameter("accno", accountNumber);
 		return query.getResultList();
 	}
 
@@ -65,51 +67,74 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Transactional
-	public Transaction addOrUpdateTransaction(Transaction transaction) {
-		// TODO Auto-generated method stub
-		Transaction tr = em.merge(transaction);
-		return tr;
-
+	public Beneficiary addBeneficiary(Beneficiary beneficiary) {
+		em.persist(beneficiary);
+		return beneficiary;
 	}
 
-	@Transactional
-	public List<Transaction> findtoprec() {
-		// TODO Auto-generated method stub
-		String jpql = "select tx from Transaction tx WHERE rownum<=5 ORDER BY transactionId DESC";
-		TypedQuery<Transaction> query = em.createQuery(jpql, Transaction.class);
+	public List<Beneficiary> viewAllBeneficiaries(int accountNumber) {
+		String jpql = "select b from Beneficiary b where b.customerAccountNumber=:accNo";
+//		String jpql = "select u from Customer c where c.userId=:cid and c.password=:pwd";
+
+//		TypedQuery<Customer> query = em.createQuery(jpql, Customer.class);
+//		query.setParameter("cid", custId);
+//		query.setParameter("pwd", password);
+		TypedQuery<Beneficiary> query = em.createQuery(jpql, Beneficiary.class);
+		query.setParameter("accNo", accountNumber);
 		return query.getResultList();
 	}
-	
+
 	@Transactional
-	public boolean isUserExists(int custId) {
+	public void deleteBeneficiary(int beneficiaryId) {
+		Beneficiary beneficiary = findBeneficiaryById(beneficiaryId);
+		em.remove(beneficiary);
+	}
+
+	public Beneficiary findBeneficiaryById(int beneficiaryId) {
+		return em.find(Beneficiary.class, beneficiaryId);
+	}
+
+//	@Transactional
+//	public Transaction addOrUpdateTransaction(Transaction transaction) {
+//		// TODO Auto-generated method stub
+//		Transaction tr = em.merge(transaction);
+//		return tr;
+//
+//	}
+
+	@Transactional
+	public List<Transaction> findtoprec(int accountNumber) {
+		String jpql = "select t from Transaction t where t.account.accountNumber=:accNo and rownum<=5 ORDER BY transactionId DESC";
+		TypedQuery<Transaction> query = em.createQuery(jpql, Transaction.class);
+		query.setParameter("accNo", accountNumber);
+		return query.getResultList();
+	}
+
+	@Transactional
+	public boolean isCustomerExists(int accountNumber) {
 //		String jpql="select count(c.custId)>0 from Customer c where c.custId=:custId";
 //		TypedQuery<Customer> query=em.createNamedQuery(jpql, Customer.class);
 //		query.setParameter("custId",custId);
 //		Customer cust=query.getSingleResult();
 //		return cust!=null?true:false;
-		return em.find(Customer.class, custId) != null;
+		return em.find(Account.class, accountNumber) != null;
 	}
-	
+
 	@Transactional
 	public Customer addOrUpdateCustomer(Customer customer) {
-		// TODO Auto-generated method stub
 		Customer c = em.merge(customer);
 		return c;
 	}
 
-	public boolean login(int custId, String password) {
-		String jpql = "select u from Customer c where c.userId=:cid and c.password=:pwd";
+	@Transactional
+	public boolean login(int customerId, String password) {
+		String jpql = "select c from Customer c where c.custId=:cid and c.customerPassword=:pwd";
 
-		TypedQuery<User> query = em.createQuery(jpql, Customer.class);
-		query.setParameter("cid", custId);
+		TypedQuery<Customer> query = em.createQuery(jpql, Customer.class);
+		query.setParameter("cid", customerId);
 		query.setParameter("pwd", password);
 
-		Customer customer=null;
-		try {
-			customer = query.getSingleResult(); 
-		} catch (Exception e) {
-			return false;
-		}
-		return true;
+		Customer customer = query.getSingleResult();
+		return customer != null ? true : false;
 	}
 }

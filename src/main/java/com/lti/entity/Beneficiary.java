@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -16,14 +17,18 @@ import javax.persistence.Table;
 public class Beneficiary {
 
 	@Id
-	@SequenceGenerator(name = "ben_seq", sequenceName = "BEN_ID_SEQ", allocationSize = 1)
+	@SequenceGenerator(name = "ben_seq", initialValue = 301, allocationSize = 1)
 	@GeneratedValue(generator = "ben_seq", strategy = GenerationType.SEQUENCE)
 	@Column(name = "beneficiary_id")
 	private int beneficiaryId;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "account_number")
-	private Account account;
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "beneficiary_account_number")
+	private Account beneficiaryAccount;
+
+//	@OneToOne(cascade = CascadeType.ALL)
+	@Column(name = "customer_account_number")
+	private int customerAccountNumber;
 
 	@Column(name = "beneficiary_name")
 	private String beneficiaryName;
@@ -36,12 +41,21 @@ public class Beneficiary {
 		this.beneficiaryId = beneficiaryId;
 	}
 
-	public Account getAccount() {
-		return account;
+	public Account getBeneficiaryAccount() {
+		return beneficiaryAccount;
 	}
 
-	public void setAccount(Account account) {
-		this.account = account;
+	public void setBeneficiaryAccount(Account beneficiaryAccount) {
+		this.beneficiaryAccount = beneficiaryAccount;
+	}
+
+
+	public int getCustomerAccountNumber() {
+		return customerAccountNumber;
+	}
+
+	public void setCustomerAccountNumber(int customerAccountNumber) {
+		this.customerAccountNumber = customerAccountNumber;
 	}
 
 	public String getBeneficiaryName() {

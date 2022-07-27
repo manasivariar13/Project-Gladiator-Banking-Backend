@@ -9,19 +9,19 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="table_admin")
+@Table(name = "table_admin")
 public class Admin {
-	
+
 	@Id
-	@SequenceGenerator(name = "adm_seq", sequenceName = "ADMIN_LOGIN_NO_SEQ", allocationSize = 2)
+	@SequenceGenerator(name = "adm_seq", initialValue = 1, allocationSize = 1)
 	@GeneratedValue(generator = "adm_seq", strategy = GenerationType.SEQUENCE)
-	@Column(name="admin_login_id")
+	@Column(name = "admin_login_id")
 	private int id;
-	
-	@Column(name="admin_password")
+
+	@Column(name = "admin_password")
 	private String password;
-	
-	@Column(name="admin_name")
+
+	@Column(name = "admin_name")
 	private String name;
 
 	public int getId() {

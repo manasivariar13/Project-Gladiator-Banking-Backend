@@ -13,19 +13,19 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "table_otp")
 public class Otp {
-	
+
 	@Id
-	@SequenceGenerator(name = "otp_seq", sequenceName = "OTP_SEQ", allocationSize = 1)
+	@SequenceGenerator(name = "otp_seq", initialValue = 701, allocationSize = 1)
 	@GeneratedValue(generator = "otp_seq", strategy = GenerationType.SEQUENCE)
-	@Column(name="otp_id")
+	@Column(name = "otp_id")
 	private int id;
-	
+
 	private String otp;
-	
-	@Column(name="user_id")
+
+	@Column(name = "user_id")
 	private int userId;
-	
-	@Column(name="date_time")
+
+	@Column(name = "date_time")
 	private LocalDateTime dateTime;
 
 	public LocalDateTime getDateTime() {

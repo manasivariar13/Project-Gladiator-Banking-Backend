@@ -21,7 +21,7 @@ import javax.persistence.Table;
 
 public class Customer {
 	@Id
-	@SequenceGenerator(name = "cust_seq", sequenceName = "CUSTOMER_SERVICE_REF_NO_SEQ", allocationSize = 11)
+	@SequenceGenerator(name = "cust_seq", initialValue = 401, allocationSize = 1)
 	@GeneratedValue(generator = "cust_seq", strategy = GenerationType.SEQUENCE)
 	@Column(name = "customer_id")
 	private int custId;

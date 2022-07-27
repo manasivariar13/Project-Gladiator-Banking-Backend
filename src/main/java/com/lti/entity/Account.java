@@ -24,7 +24,7 @@ import com.lti.dao.CustomerDaoImpl;
 public class Account {
 
 	@Id
-	@SequenceGenerator(name = "acc_seq", sequenceName = "ACC_NO_SEQ", initialValue = 100001, allocationSize = 1)
+	@SequenceGenerator(name = "acc_seq", initialValue = 100001, allocationSize = 1)
 	@GeneratedValue(generator = "acc_seq", strategy = GenerationType.SEQUENCE)
 	@Column(name = "account_number")
 	private int accountNumber;
@@ -41,7 +41,7 @@ public class Account {
 	@OneToMany(mappedBy = "account")
 	List<Transaction> transactions;
 
-	@OneToMany(mappedBy = "account")
+	@OneToMany(mappedBy = "beneficiaryAccount")
 	List<Beneficiary> beneficiaries;
 
 	private double balance;

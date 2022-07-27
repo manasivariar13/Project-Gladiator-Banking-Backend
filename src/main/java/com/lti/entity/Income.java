@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Income {
 
 	@Id
-	@SequenceGenerator(name = "income_seq", sequenceName = "INCOME_ID_SEQ", allocationSize = 1)
+	@SequenceGenerator(name = "income_seq", initialValue = 601, allocationSize = 1)
 	@GeneratedValue(generator = "income_seq", strategy = GenerationType.SEQUENCE)
 	private int incomeId;
 
